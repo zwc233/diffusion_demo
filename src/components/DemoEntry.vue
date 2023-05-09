@@ -1,24 +1,35 @@
 <template>
   <div id="app">
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <head>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+        rel="stylesheet"
+      />
+    </head>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">Features</el-menu-item>
-      <el-menu-item index="2">FAQ</el-menu-item>
-      <el-menu-item index="3">Principle</el-menu-item>
-      <el-menu-item index="5">Classifier Free</el-menu-item>
-      <el-menu-item index="6">Stable Diffusion</el-menu-item>
-      <el-menu-item index="7"><a href="https://github.com/zwc233/guided-diffusion" target="_blank">Github</a></el-menu-item>
+      <el-menu-item index="1">
+        <font-awesome-icon icon="fa-palette" size="2xl" style="color: #409EFF;" />
+        <span style="margin-left: 8px;">Diffusion</span>
+        &nbsp;&nbsp;
+        <span> Model</span>
+      </el-menu-item>
+      <el-menu-item index="2">Features</el-menu-item>
+      <el-menu-item index="3">FAQ</el-menu-item>
+      <el-menu-item index="4">Principles</el-menu-item>
+      <el-menu-item index="5">Classifier Guidance</el-menu-item>
+      <el-menu-item index="6">Classifier Free</el-menu-item>
+      <el-menu-item index="7">Stable Diffusion</el-menu-item>
+      <el-menu-item index="8">References</el-menu-item>
+      <el-menu-item index="9">
+        <font-awesome-icon icon="fa-brands fa-github" size="2xl" />
+        <a style="margin-left: 8px;" href="https://github.com/zwc233/guided-diffusion" target="_blank">Github</a>
+      </el-menu-item>
     </el-menu>
-    <el-container style="height: 100vh;">
+    <el-container style="height: 80vh;">
       <el-main class="centered-content">
         <h1>
           <span style="margin-right: 15px;">Diffusion Model</span>
@@ -32,15 +43,16 @@
         <div class="centered-text">
           <p>
             ZheJiang University, 2023, Graduation Project
-            <br />
-            <b>Diffusion Model with Classifier Guidance</b>
-            <br />
+            <b>Diffusion Model with Classifier Guidance</b>.
             In these times, research of Image Generate Model has become a hot topic. 
             And the most popular one is <b>Diffusion Model</b>, 
-            <br />
-            a technique that can remove nosie from an fully noisy image and generate a clean image.
-            <br />
+            a technique that can remove nosie from an fully noisy image and generate a clear image.
             In our research, we use Classifier to guide the model to generate a specific image.
+            In detail, like ink disperses in water. Diffusion Model use forward process to sequentially add guassian noise to the image
+            from which we can get useful labels to train to backward process.
+            And In backward process we generate a fully noise, use our diffusion model to remove noise util it become clear
+            But we can hardly control this process to generate a specific image. So we use Classifier to guide the model.
+            We can use a pre-trained noise-robust classifier to guide each backward step of the diffusion model.
           </p>
         </div>
       </el-main>
@@ -98,6 +110,7 @@ h1 {
 
 .centered-text {
   text-align: center;
+  max-width: 73em;
   margin-bottom: 1em;
 }
 
@@ -121,6 +134,34 @@ p {
   font-family: "Open Sans", sans-serif;
   font-size: 1.2em;
   line-height: 1.5em;
+}
+
+.el-menu-demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.el-menu-demo .el-menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 20;
+  color: #303133;
+}
+
+.el-menu {
+  background: linear-gradient(to bottom, #ADD8E6, #FFFFFF) !important;
+}
+html, body {
+  margin: 0;
+  padding: 0;
 }
 </style>
   
