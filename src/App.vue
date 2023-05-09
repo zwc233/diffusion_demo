@@ -6,7 +6,7 @@
 
 <script>
 // import demoMain from './components/DemoMain.vue'
-import demoEntry from './components/DemoEntry.vue'
+import demoEntry from './view/DemoEntry.vue'
 export default {
   name: 'App',
   components: {
