@@ -4,6 +4,7 @@ import newPage from '../components/NewPage.vue'
 import demoEntry from '../view/DemoEntry.vue'
 import principlesPage from '../view/PrinciplesPage.vue'
 import resultPage from '../view/ResultPage.vue'
+import schemesPage from '../view/SchemesPage.vue'
 
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -27,6 +28,10 @@ export default new VueRouter({
     {
       path: '/result',
       component: resultPage,
+    },
+    {
+      path: '/schemes',
+      component: schemesPage,
     }
   ]
 })

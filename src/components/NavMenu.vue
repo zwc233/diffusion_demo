@@ -13,7 +13,7 @@
                 <span> Model</span>
             </el-menu-item>
             <el-menu-item index="/principles">Principles</el-menu-item>
-            <el-menu-item index="3">Feature</el-menu-item>
+            <el-menu-item index="/schemes">Schemes</el-menu-item>
             <el-menu-item index="4">Classifier Guidance</el-menu-item>
             <el-menu-item index="5">Classifier Free</el-menu-item>
             <el-menu-item index="6">Evaluations</el-menu-item>
