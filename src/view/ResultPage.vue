@@ -239,7 +239,7 @@ export default {
                 ISScore: '151.513',
                 FID: '99.959',
                 sFID: '353.512',
-                recision: '0.9',
+                precision: '0.9',
                 recall: '0.5348',
             }
             ]
