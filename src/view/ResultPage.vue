@@ -4,11 +4,16 @@
         <div class="centered-content">
             <h1 class="centered-title"> Result </h1>
             <p class="centered-text">
-                Depending on the sceond Scheme, we try to insert a external image classifier to guide the diffusion model. At each time_step,
-                we put our noisy image into a imageNet 1k classifer and get a length 1k tensor which stand to the probability score of each class.
-                then we get the gradient of this tensor and use it to change the mean value of the next sample noisy image. We mentioned before that the
-                external classifier cant work well on the heavy noisy image, so we apply the external classifier on the sample image on the last 100 or 200 time step
-                of the totally 1000 denoise step. And we have try many classifer in different scale images, and get the result as below shows
+                Depending on the sceond Scheme, we try to insert a external image classifier to guide the diffusion model.
+                At each time_step,
+                we put our noisy image into a imageNet 1k classifer and get a length 1k tensor which stand to the
+                probability score of each class.
+                then we get the gradient of this tensor and use it to change the mean value of the next sample noisy image.
+                We mentioned before that the
+                external classifier cant work well on the heavy noisy image, so we apply the external classifier on the
+                sample image on the last 100 or 200 time step
+                of the totally 1000 denoise step. And we have try many classifer in different scale images, and get the
+                result as below shows
             </p>
             <h2>64 * 64 image</h2>
             <el-collapse style="width: 1200px;" v-model="activeNames1">
@@ -37,7 +42,7 @@
                 </el-collapse-item>
                 <el-collapse-item title="Chart" name="2">
                     <el-button @click="handleChartChange('chart1')">切换</el-button>
-                    <div class="echart" id="chart1" :style="myChartStyle" ></div>
+                    <div class="echart" id="chart1" :style="myChartStyle"></div>
                 </el-collapse-item>
             </el-collapse>
             <h2>128 * 128 image</h2>
@@ -149,7 +154,7 @@ export default {
     },
     data() {
         return {
-            charts:{},
+            charts: {},
             myChartStyle: { float: "left", width: "1200px", height: "300px" }, //图表样式
 
             chartTable: {
@@ -228,6 +233,15 @@ export default {
                 precision: '0.9',
                 recall: '0.536',
             },
+            {
+                classifier: 'resnet101_dwt_db2',
+                steps: '100',
+                ISScore: '151.513',
+                FID: '99.959',
+                sFID: '353.512',
+                recision: '0.9',
+                recall: '0.5348',
+            }
             ]
         }
     },
@@ -280,5 +294,4 @@ h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-size: 4em;
-}
-</style>
+}</style>
