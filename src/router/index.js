@@ -5,7 +5,7 @@ import demoEntry from '../view/DemoEntry.vue'
 import principlesPage from '../view/PrinciplesPage.vue'
 import resultPage from '../view/ResultPage.vue'
 import schemesPage from '../view/SchemesPage.vue'
-
+import classifierGuidancePage from '../view/ClassifierGuidancePage.vue'
 Vue.use(VueRouter)
 export default new VueRouter({
   routes: [
@@ -32,6 +32,10 @@ export default new VueRouter({
     {
       path: '/schemes',
       component: schemesPage,
+    },
+    {
+      path: '/classifierGuidance',
+      component: classifierGuidancePage,
     }
   ]
 })

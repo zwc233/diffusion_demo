@@ -17,7 +17,7 @@
             </p>
             <h2>64 * 64 image</h2>
             <el-collapse style="width: 1200px;" v-model="activeNames1">
-                <el-collapse-item title="Data" name="1">
+                <el-collapse-item name="1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>64 * 64 ImageNet 1k</span>
@@ -40,18 +40,25 @@
                         </el-table>
                     </el-card>
                 </el-collapse-item>
-                <el-collapse-item title="Chart" name="2">
-                    <el-button @click="handleChartChange('chart1')">切换</el-button>
+                <el-collapse-item name="2">
+                    <div slot="title">
+                        <el-radio-group style="margin-left: 20px;" @change="handleChartChange('chart1')" v-model="radio1">
+                            <el-radio :label="0">IS score</el-radio>
+                            <el-radio :label="1">FID</el-radio>
+                            <el-radio :label="2">sFID</el-radio>
+                            <el-radio :label="3">Precision</el-radio>
+                            <el-radio :label="4">Recall</el-radio>
+                        </el-radio-group>
+                    </div>
                     <div class="echart" id="chart1" :style="myChartStyle"></div>
                 </el-collapse-item>
             </el-collapse>
             <h2>128 * 128 image</h2>
             <el-collapse style="width: 1200px;" v-model="activeNames2">
-                <el-collapse-item title="Data" name="1">
+                <el-collapse-item name="1">
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>128 * 128 ImageNet 1k</span>
-                            <el-button style="float: right; padding: 3px 0" type="text">详情</el-button>
                         </div>
                         <el-table :data="tableData2" stripe style="width: 100%">
                             <el-table-column prop="classifier" label="分类器" width="180">
@@ -71,7 +78,16 @@
                         </el-table>
                     </el-card>
                 </el-collapse-item>
-                <el-collapse-item title="Chart" name="2">
+                <el-collapse-item name="2">
+                    <div slot="title">
+                        <el-radio-group style="margin-left: 20px;" @change="handleChartChange('chart2')" v-model="radio2">
+                            <el-radio :label="0">IS score</el-radio>
+                            <el-radio :label="1">FID</el-radio>
+                            <el-radio :label="2">sFID</el-radio>
+                            <el-radio :label="3">Precision</el-radio>
+                            <el-radio :label="4">Recall</el-radio>
+                        </el-radio-group>
+                    </div>
                     <div class="echart" id="chart2" :style="myChartStyle"></div>
                 </el-collapse-item>
             </el-collapse>
@@ -81,7 +97,6 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>256 * 256 ImageNet 1k</span>
-                            <el-button style="float: right; padding: 3px 0" type="text">详情</el-button>
                         </div>
                         <div v-for="o in 4" :key="o" class="text item">
                             {{ '列表内容 ' + o }}
@@ -103,12 +118,11 @@ export default {
     name: 'resultPage',
     methods: {
         handleChartChange(key) {
+            event.stopPropagation()
             if (key == 'chart1') {
-                this.activeTab1 += 1
-                this.initEcharts(this.tabs[this.activeTab1 % 4], 'chart1')
+                this.initEcharts(this.tabs[this.radio1], 'chart1')
             } else if (key == 'chart2') {
-                this.activeTab2 += 1
-                this.initEcharts(this.tabs[this.activeTab2 % 4], 'chart2')
+                this.initEcharts(this.tabs[this.radio2], 'chart2')
             }
         },
         initEcharts(key, chartName) {
@@ -136,9 +150,6 @@ export default {
                     right: "0",
                     bottom: "20%"
                 },
-                title: {
-                    text: `classifer-${key} chart`,
-                },
             };
             if (!this.charts[chartName]) {
                 this.charts[chartName] = echarts.init(document.getElementById(chartName))
@@ -154,6 +165,10 @@ export default {
     },
     data() {
         return {
+            radio1: 0,
+            radio2: 0,
+            radio3: 0,
+            
             charts: {},
             myChartStyle: { float: "left", width: "1200px", height: "300px" }, //图表样式
 
@@ -241,7 +256,16 @@ export default {
                 sFID: '353.512',
                 precision: '0.9',
                 recall: '0.5348',
-            }
+            },
+            {
+                classifier: 'resnet101_dwt_db2',
+                steps: '1000',
+                ISScore: '69.986',
+                FID: '96.580',
+                sFID: '372.824',
+                precision: '0.772',
+                recall: '0.611',
+            },
             ]
         }
     },
@@ -294,4 +318,5 @@ h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-size: 4em;
-}</style>
+}
+</style>
